@@ -1,0 +1,17 @@
+from lib2to3.pgen2 import driver
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import pytest
+@pytest.fixture()
+def test_login():
+    global driver
+    driver = webdriver.Chrome(executable_path="D:\\python\\DATA SCIENCE\\chromedriver.exe")
+    driver.implicitly_wait(10)
+    driver.maximize_window()
+def test_setup(test_login):
+    driver.get("https://www.facebook.com")
+    driver.find_element(By.NAME,"email").send_keys("XXXX@gmail.com")
+    driver.find_element(By.NAME,"pass").send_keys("XXX@ABC")
+    driver.find_element(By.NAME,"login").click()
+    driver.close()
+    assert True
